@@ -1,0 +1,33 @@
+{
+  "entityType" : "CUSTOMER",
+  "entity" : {
+    "additionalInfo" : null,
+    "address" : null,
+    "address2" : null,
+    "city" : null,
+    "country" : null,
+    "email" : null,
+    "externalId" : null,
+    "id" : {
+      "entityType" : "CUSTOMER",
+      "id" : "6f50d7d0-b8f9-11ed-8465-2936a2b62b0c"
+    },
+    "name" : "Customer B",
+    "phone" : null,
+    "state" : null,
+    "title" : "Customer B",
+    "zip" : null
+  },
+  "relations" : [ ],
+  "attributes" : {
+    "SERVER_SCOPE" : [ {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "APPID",
+      "lastUpdateTs" : 1678100896953,
+      "longValue" : null,
+      "strValue" : "2347d5c2a078de991fd645ead2d4da77"
+    } ]
+  }
+}

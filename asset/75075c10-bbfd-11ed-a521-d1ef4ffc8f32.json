@@ -1,0 +1,60 @@
+{
+  "entityType" : "ASSET",
+  "entity" : {
+    "additionalInfo" : {
+      "description" : ""
+    },
+    "assetProfileId" : {
+      "entityType" : "ASSET_PROFILE",
+      "id" : "6f0fb020-b8f9-11ed-8465-2936a2b62b0c"
+    },
+    "customerId" : {
+      "entityType" : "CUSTOMER",
+      "id" : "6f50d7d0-b8f9-11ed-8465-2936a2b62b0c"
+    },
+    "externalId" : null,
+    "id" : {
+      "entityType" : "ASSET",
+      "id" : "75075c10-bbfd-11ed-a521-d1ef4ffc8f32"
+    },
+    "label" : "bulding",
+    "name" : "Bulding B",
+    "type" : "default"
+  },
+  "relations" : [ ],
+  "attributes" : {
+    "SERVER_SCOPE" : [ {
+      "booleanValue" : true,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "isFahrenheit",
+      "lastUpdateTs" : 1678168365076,
+      "longValue" : null,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : 23.58589,
+      "jsonValue" : null,
+      "key" : "latitude",
+      "lastUpdateTs" : 1678101103003,
+      "longValue" : null,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : 58.405922,
+      "jsonValue" : null,
+      "key" : "longitude",
+      "lastUpdateTs" : 1678101149174,
+      "longValue" : null,
+      "strValue" : null
+    }, {
+      "booleanValue" : null,
+      "doubleValue" : null,
+      "jsonValue" : null,
+      "key" : "units",
+      "lastUpdateTs" : 1678169900053,
+      "longValue" : null,
+      "strValue" : "metric"
+    } ]
+  }
+}

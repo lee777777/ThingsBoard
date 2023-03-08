@@ -1,0 +1,178 @@
+{
+  "entityType" : "RULE_CHAIN",
+  "entity" : {
+    "additionalInfo" : null,
+    "configuration" : null,
+    "debugMode" : false,
+    "externalId" : null,
+    "firstRuleNodeId" : null,
+    "id" : {
+      "entityType" : "RULE_CHAIN",
+      "id" : "7f981560-bc12-11ed-a521-d1ef4ffc8f32"
+    },
+    "name" : "Outside Temperature/Humidity",
+    "root" : false,
+    "type" : "CORE"
+  },
+  "metaData" : {
+    "connections" : [ {
+      "fromIndex" : 0,
+      "toIndex" : 1,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 1,
+      "toIndex" : 2,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 2,
+      "toIndex" : 3,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 4,
+      "toIndex" : 5,
+      "type" : "Success"
+    }, {
+      "fromIndex" : 5,
+      "toIndex" : 0,
+      "type" : "Success"
+    } ],
+    "firstNodeIndex" : null,
+    "nodes" : [ {
+      "additionalInfo" : {
+        "description" : null,
+        "layoutX" : 641,
+        "layoutY" : 212
+      },
+      "configuration" : {
+        "tellFailureIfAbsent" : null,
+        "fetchToData" : false,
+        "clientAttributeNames" : [ ],
+        "sharedAttributeNames" : [ ],
+        "serverAttributeNames" : [ "latitude", "longitude", "units", "isFahrenheit" ],
+        "latestTsKeyNames" : [ ],
+        "getLatestValueWithTs" : null
+      },
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "7fa5a9f0-bc12-11ed-a521-d1ef4ffc8f32"
+      },
+      "name" : "Latitude/Longitude",
+      "ruleChainId" : null,
+      "type" : "org.thingsboard.rule.engine.metadata.TbGetAttributesNode"
+    }, {
+      "additionalInfo" : {
+        "layoutX" : 939,
+        "layoutY" : 215
+      },
+      "configuration" : {
+        "restEndpointUrlPattern" : "http://api.openweathermap.org/data/2.5/weather?lat=${ss_latitude}&lon=${ss_longitude}&units=${ss_units}&APPID=${APPID}",
+        "requestMethod" : "GET",
+        "headers" : { },
+        "useSimpleClientHttpFactory" : false
+      },
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "7faa8bf0-bc12-11ed-a521-d1ef4ffc8f32"
+      },
+      "name" : "Get Weather Data",
+      "ruleChainId" : null,
+      "type" : "org.thingsboard.rule.engine.rest.TbRestApiCallNode"
+    }, {
+      "additionalInfo" : {
+        "description" : null,
+        "layoutX" : 1255,
+        "layoutY" : 215
+      },
+      "configuration" : {
+        "scriptLang" : "JS",
+        "jsScript" : "var newMsg = {\n    \"outsideTemp\": msg.main.temp,\n    \"outsideMaxTemp\": msg.main.temp_max,\n    \"outsideMinTemp\": msg.main.temp_min,\n    \"Humidity\": msg.main.humidity,\n    \"windSpeed\": msg.wind.speed,\n    \"windDirection\":msg.wind.deg,\n    \"cloudsPrecentage\":msg.clouds.all,\n    \"feels_like\": msg.main.feels_like\n    \n};\n\n\nreturn {msg: newMsg, metadata: metadata, msgType: msgType};",
+        "tbelScript" : null
+      },
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "7fab0120-bc12-11ed-a521-d1ef4ffc8f32"
+      },
+      "name" : "Fetch Data",
+      "ruleChainId" : null,
+      "type" : "org.thingsboard.rule.engine.transform.TbTransformMsgNode"
+    }, {
+      "additionalInfo" : {
+        "layoutX" : 1258,
+        "layoutY" : 331
+      },
+      "configuration" : {
+        "defaultTTL" : 0
+      },
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "7fab7650-bc12-11ed-a521-d1ef4ffc8f32"
+      },
+      "name" : "Save Timeseries",
+      "ruleChainId" : null,
+      "type" : "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode"
+    }, {
+      "additionalInfo" : {
+        "description" : null,
+        "layoutX" : 48,
+        "layoutY" : 215
+      },
+      "configuration" : {
+        "msgCount" : 0,
+        "periodInSeconds" : 15,
+        "scriptLang" : "JS",
+        "jsScript" : "return { msg: {}, metadata: {}, msgType: \"POST_TELEMETRY_REQUEST\" };",
+        "tbelScript" : null,
+        "originatorId" : "75075c10-bbfd-11ed-a521-d1ef4ffc8f32",
+        "originatorType" : "ASSET"
+      },
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "7facfcf0-bc12-11ed-a521-d1ef4ffc8f32"
+      },
+      "name" : "Generate requests",
+      "ruleChainId" : null,
+      "type" : "org.thingsboard.rule.engine.debug.TbMsgGeneratorNode"
+    }, {
+      "additionalInfo" : {
+        "layoutX" : 342,
+        "layoutY" : 213
+      },
+      "configuration" : {
+        "attrMapping" : {
+          "APPID" : "APPID"
+        },
+        "telemetry" : false
+      },
+      "createdTime" : 0,
+      "debugMode" : false,
+      "externalId" : null,
+      "id" : {
+        "entityType" : "RULE_NODE",
+        "id" : "7fadc040-bc12-11ed-a521-d1ef4ffc8f32"
+      },
+      "name" : "Get customer API key",
+      "ruleChainId" : null,
+      "type" : "org.thingsboard.rule.engine.metadata.TbGetCustomerAttributeNode"
+    } ],
+    "ruleChainConnections" : null
+  },
+  "relations" : [ ],
+  "attributes" : {
+    "SERVER_SCOPE" : [ ]
+  }
+}
